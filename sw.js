@@ -1,16 +1,33 @@
-const cacheName = 'hissasi-v2';
-const assets = ['./', './index.html', './manifest.json'];
+// تغيير الرقم هنا إلى v2 يجبر المتصفح على التحديث
+const cacheName = 'hissasi-v2'; 
+const assets = [
+  './',
+  './index.html',
+  './manifest.json',
+  './icon-512.png'
+];
 
-// تثبيت التطبيق في الذاكرة المؤقتة
 self.addEventListener('install', e => {
   e.waitUntil(
     caches.open(cacheName).then(cache => {
       return cache.addAll(assets);
     })
   );
+  // تفعيل النسخة الجديدة فوراً
+  self.skipWaiting();
 });
 
-// جلب الملفات من الذاكرة عند انقطاع الإنترنت
+self.addEventListener('activate', e => {
+  e.waitUntil(
+    caches.keys().then(keys => {
+      return Promise.all(keys
+        .filter(key => key !== cacheName)
+        .map(key => caches.delete(key))
+      );
+    })
+  );
+});
+
 self.addEventListener('fetch', e => {
   e.respondWith(
     caches.match(e.request).then(res => {
