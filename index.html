@@ -10,13 +10,41 @@
 <link rel="apple-touch-icon" href="icon-512.png">
 
 <script>
-  // تفعيل السيرفس وركر للعمل بدون إنترنت
+  // 1. تفعيل السيرفس وركر مع نظام التنبيه بالتحديث
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('sw.js')
-        .then(reg => console.log('PWA Ready!', reg))
-        .catch(err => console.log('PWA Error', err));
+      navigator.serviceWorker.register('sw.js').then(reg => {
+        console.log('✅ PWA Ready');
+        
+        // التحقق من وجود تحديث جديد
+        reg.onupdatefound = () => {
+          const installingWorker = reg.installing;
+          installingWorker.onstatechange = () => {
+            if (installingWorker.state === 'installed') {
+              if (navigator.serviceWorker.controller) {
+                // هناك نسخة جديدة! اطلب من المستخدم التحديث
+                showUpdateToast();
+              }
+            }
+          };
+        };
+      });
     });
+  }
+
+  // وظيفة إظهار تنبيه التحديث
+  function showUpdateToast() {
+    const confirmUpdate = confirm("🚀 تحديث جديد متاح (إصلاح المرحلة والأسبوع). هل تريد التحديث الآن للحصول على المميزات الجديدة؟");
+    if (confirmUpdate) {
+      window.location.reload();
+    }
+  }
+
+  // 2. كود تغيير اللغة وتحديث عنوان التبويب
+  function applyLanguage() {
+    const d = dict[currentLang];
+    document.title = (currentLang === 'ar') ? "نظام تدبير الحصص" : "Gestion des Classes";
+    // ... باقي كود اللغة الخاص بك ...
   }
 </script>
 
