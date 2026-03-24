@@ -98,6 +98,43 @@
             th { background: #eee !important; -webkit-print-color-adjust: exact; }
             table, td, th { border: 1px solid #000; }
         }
+         /* إعدادات الجدول الأساسية */
+#lessonsTable {
+    width: 100% !important;
+    table-layout: fixed !important; /* ضروري جداً لاحترام النسب */
+    border-collapse: collapse;
+}
+
+/* 1. عمود الوقت (12%) */
+#lessonsTable th:nth-child(1), #lessonsTable td:nth-child(1) { width: 12%; }
+
+/* 2. عمود المستوى (10%) */
+#lessonsTable th:nth-child(2), #lessonsTable td:nth-child(2) { width: 10%; }
+
+/* 3. عمود الأفواج - الجديد (10%) */
+#lessonsTable th:nth-child(3), #lessonsTable td:nth-child(3) { width: 10%; }
+
+/* 4. عمود المادة (15%) */
+#lessonsTable th:nth-child(4), #lessonsTable td:nth-child(4) { width: 15%; }
+
+/* 5. عمود عنوان الدرس - الأكبر (40%) */
+#lessonsTable th:nth-child(5), #lessonsTable td:nth-child(5) { 
+    width: 40% !important; 
+    white-space: normal !important; 
+    word-wrap: break-word; 
+    overflow-wrap: break-word;
+    text-align: right;
+}
+
+/* 6. عمود العمليات - تعديل/حذف (13%) */
+#lessonsTable th:nth-child(6), #lessonsTable td:nth-child(6) { width: 13%; }
+
+/* تحسين المظهر العام للخلايا */
+#lessonsTable td, #lessonsTable th {
+    padding: 8px 4px;
+    font-size: 0.9rem; /* تصغير الخط قليلاً ليناسب الـ 6 أعمدة على الهاتف */
+    vertical-align: middle;
+}
     </style>
 </head>
 <body>
