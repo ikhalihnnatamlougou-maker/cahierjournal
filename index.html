@@ -46,6 +46,26 @@
     document.title = (currentLang === 'ar') ? "نظام تدبير الحصص" : "Gestion des Classes";
     // ... باقي كود اللغة الخاص بك ...
   }
+     function forceUpdateApp() {
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(function(registrations) {
+            for(let registration of registrations) {
+                registration.unregister(); // حذف التسجيل القديم
+            }
+            // مسح الكاش البرمجي
+            caches.keys().then(function(names) {
+                for (let name of names) caches.delete(name);
+            });
+            
+            alert("⏳ جاري جلب التحديثات من الخادم... سيتم إعادة تشغيل التطبيق الآن.");
+            
+            // إضافة معامل عشوائي للرابط لمنع المتصفح من استخدام الكاش
+            window.location.href = window.location.pathname + '?update=' + Date.now();
+        });
+    } else {
+        window.location.reload(true);
+    }
+}
 </script>
 
     <style>
