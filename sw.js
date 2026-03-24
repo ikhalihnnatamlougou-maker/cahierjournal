@@ -1,5 +1,5 @@
 // تغيير الرقم هنا إلى v2 يجبر المتصفح على التحديث
-const cacheName = 'hissasi-v2'; 
+const cacheName = 'hissasi-v3'; 
 const assets = [
   './',
   './index.html',
