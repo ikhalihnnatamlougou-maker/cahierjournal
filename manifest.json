@@ -1,6 +1,6 @@
 {
-  "name": "نظام تدبير الحصص الرقمي",
-  "short_name": "حصصي",
+  "name": "المذكرة اليومية",
+  "short_name": "مذكرتي",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#ffffff",
