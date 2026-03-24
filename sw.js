@@ -1,4 +1,4 @@
-const cacheName = 'hissasi-v1';
+const cacheName = 'hissasi-v2';
 const assets = ['./', './index.html', './manifest.json'];
 
 // تثبيت التطبيق في الذاكرة المؤقتة
